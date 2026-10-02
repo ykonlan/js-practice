@@ -12,4 +12,12 @@ function createGrid(size){
     }
 }
 
+let resizeBtn = document.querySelector("#resize");
+resizeBtn.addEventListener("click", function(){
+    size = prompt("Enter Grid Size");
+    let container = document.querySelector(".container");
+    container.innerHTML = "";
+    createGrid(Number(size));
+})
+
 createGrid(16);
