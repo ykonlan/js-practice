@@ -12,9 +12,10 @@ function getHumanChoice(){
 
 
 
-function playRound(computer_choice, human_choice){
+function playRound(human_choice){
     let winner
     let winning_pairs = [["rock", "scissors"], ["paper", "rock"], ["scissors","paper"]];
+    let computer_choice = getComputerChoice();
     if(computer_choice === human_choice){
         return "tie";
     }
@@ -26,33 +27,62 @@ function playRound(computer_choice, human_choice){
         console.log(`You Lose! ${computer_choice} beats ${human_choice}`);
     }
     return winner
-
-
 }
 
-function playGame(){
-    let human_score = 0;
-    let computer_score = 0;
-    for(i=0; i<5; i++){
-        let human_choice = getHumanChoice();
-        let computer_choice = getComputerChoice();
-        let winner = playRound(computer_choice, human_choice);
-        if(winner === "computer"){
-            computer_score += 1;
-        }else if(winner === "human"){
-            human_score += 1;
+
+function selectButton(btn){
+    let choices = document.querySelectorAll(".choice");
+    choices.forEach(element => {
+        element.classList.remove("selected");
+    });
+    btn.target.classList.add("selected");
+}
+
+let choices = document.querySelectorAll(".choice");
+choices.forEach(element => {
+    element.addEventListener("click", selectButton);
+});
+
+let human = 0;
+let pc = 0;
+let played = 0
+
+
+function submit_choice(){
+    let choice = document.querySelector(".choice.selected");
+    let human_scores = document.querySelector("#player-score");
+    let pc_scores = document.querySelector("#computer-score");
+    let message;
+    let message_div = document.querySelector("#game-over>h1");
+    if(played >= 4){
+        human_scores.textContent = `Player Score - ${human}`;
+        pc_scores.textContent = `Computer Score - ${pc}`;
+        let gameOverDiv = document.querySelector("#game-over>h2");
+        gameOverDiv.textContent = "Game is Over";
+        if(pc > human){
+            message = "Sorry, you Lose!";
+            message_div.style.color = "red";
+        }else if(human > pc){
+            message = "Congrats, you Win!"
+            message_div.style.color = "green";
+        }else{
+            message = "It was a tie."
         }
-        
+        message_div.textContent = message;
+        human_scores.textContent = `Player Score - ${human}`;
+        pc_scores.textContent = `Computer Score - ${pc}`;
+        return
     }
-    let message
-    if(human_score === computer_score){
-        message = `You tied ${computer_score}- ${human_score}`;
-    }else{
-        message = computer_score > human_score ? `Sorry, You lost ${computer_score}-${human_score}` : `Congrats, You won ${human_score}-${computer_score}`;
+    let winner = playRound(choice.value);
+    played++;
+    if(winner == "human"){
+        human++;
+    }else if(winner == "computer"){
+        pc++;
     }
-    console.log(message);
-    return
+    human_scores.textContent = `Player Score - ${human}`;
+    pc_scores.textContent = `Computer Score - ${pc}`;
 }
 
-console.log(["rock", "scissors"] == ["rock", "scissors"]);
-playGame();
+let submitBtn = document.querySelector("#submit");
+submitBtn.addEventListener("click",submit_choice);

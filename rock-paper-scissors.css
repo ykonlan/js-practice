@@ -1,0 +1,39 @@
+.buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.content{
+    display: flex;
+    margin: 60px;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+}
+
+button.choice{
+    border-radius: 4px;
+    width: 300px;
+    background-color: blue;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.scores{
+    border: 2px solid black;
+}
+
+button.choice:hover{
+    background-color: aqua;
+    color: black;
+}
+
+.choice.selected{
+    background-color: aqua;
+    color: black;
+}
