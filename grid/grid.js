@@ -17,9 +17,28 @@ function createGrid(size){
             subDiv.classList.add("sub-div");
             subDiv.style.height = `${width}px`;
             subDiv.style.width = `${width}px`;
+            subDiv.setAttribute("interactions", "0");
+            subDiv.addEventListener("mouseenter", function(e){
+                let int1 = randInt();
+                let int2 = randInt();
+                let int3 = randInt();
+                let interactions = Number(e.target.getAttribute("interactions"));
+                e.target.setAttribute("interactions", `${interactions + 1}`);
+                interactions = interactions + 1;
+                if(interactions <= 9){
+                    e.target.style.backgroundColor = `rgb(${int1}, ${int2}, ${int3})`;
+                    e.target.style.opacity = `${interactions}`;
+                }else{
+                    e.target.style.backgroundColor = "black";
+                }
+            })
             theDiv.appendChild(subDiv);
         }
     }
+}
+
+function randInt(){
+    return Math.floor((Math.random() * 256));
 }
 
 let resizeBtn = document.querySelector("#resize");
@@ -29,5 +48,6 @@ resizeBtn.addEventListener("click", function(){
     container.innerHTML = "";
     createGrid(Number(size));
 })
+
 
 createGrid(16);
