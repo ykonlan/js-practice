@@ -1,5 +1,6 @@
 function createGrid(size){
     let container = document.querySelector(".container");
+    let width = 960 / size;
     for(let i=0; i<size; i++){
         let theDiv = document.createElement("div");
         theDiv.style.display = "flex";
@@ -7,6 +8,8 @@ function createGrid(size){
         for(let j=0; j<size; j++){
             let subDiv = document.createElement("div");
             subDiv.classList.add("sub-div");
+            subDiv.style.height = `${width}px`;
+            subDiv.style.width = `${width}px`;
             theDiv.appendChild(subDiv);
         }
     }

@@ -4,9 +4,8 @@
 }
 
 .sub-div{
-    height: 96px;
-    width: 96px;
     border: 2px solid black;
+    
 }
 
 .sub-div:hover{
