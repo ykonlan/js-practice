@@ -1,17 +1,17 @@
 function add(a,b){
-    return a + b;
+    return Number(a) + Number(b);
 }
 
 function subtract(a,b){
-    return a - b;
+    return Number(a) - Number(b);
 }
 
 function multiply(a,b){
-    return a * b;
+    return Number(a) * Number(b);
 }
 
 function divide(a,b){
-    return a/b;
+    return Number(a)/Number(b);
 }
 
 
@@ -35,6 +35,7 @@ buttons.forEach(button => {
             if(current){
                 operation.push(current);
             }
+            console.log(operation);
             let answer = resolveOperation(operation);
             let answerBox = document.querySelector(".answer-box");
             answerBox.textContent = answer;
