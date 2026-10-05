@@ -1,10 +1,12 @@
 function getComputerChoice(){
     let choices = {0:"rock", 1:"paper", 2:"scissors"};
+    // randomizing computer choice
     let choice_no = Math.floor((Math.random() * 10)) % 3;
     return choices[choice_no];
 }
 
 function getHumanChoice(){
+    // get choice from human via prompt
     let choices = {1:"rock", 2:"paper", 3:"scissors"};
     let choice = prompt("Enter 1 for Rock, 2 for Paper or 3 for Scissors");
     return choices[Number(choice)];
@@ -13,6 +15,7 @@ function getHumanChoice(){
 
 
 function playRound(human_choice){
+    // defining criteria for determining win or loss
     let winner
     let winning_pairs = [["rock", "scissors"], ["paper", "rock"], ["scissors","paper"]];
     let computer_choice = getComputerChoice();
