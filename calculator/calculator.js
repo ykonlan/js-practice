@@ -25,6 +25,9 @@ buttons.forEach(button => {
         if(!(e.target.dataset.value === '=')){
             currentOp.textContent += e.target.dataset.value;
             if(e.target.dataset.value in standardOperators){
+                if(operation.length === 1){
+                    currentOp.textContent = operation[0] + e.target.dataset.value;
+                }
                 if(current !== ""){
                     operation.push(current);
                     current = "";
