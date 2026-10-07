@@ -25,21 +25,24 @@ buttons.forEach(button => {
         if(!(e.target.dataset.value === '=')){
             currentOp.textContent += e.target.dataset.value;
             if(e.target.dataset.value in standardOperators){
-                operation.push(current);
+                if(current !== ""){
+                    operation.push(current);
+                    current = "";
+                }
                 operation.push(e.target.dataset.value);
-                current = "";
             }else{
                 current += e.target.dataset.value;
             }
         }else{
-            if(current){
+            if(current !== ""){
                 operation.push(current);
+                current = "";
             }
             console.log(operation);
             let answer = resolveOperation(operation);
+            console.log(operation);
             let answerBox = document.querySelector(".answer-box");
             answerBox.textContent = answer;
-            console.log(answer);
         }
     });
 });
@@ -72,3 +75,24 @@ function resolveOperation(op){
     }
 
 }
+
+let backspace = document.querySelector("#backspace");
+backspace.addEventListener("click", function(e){
+    if((current !== "") || operation.length > 0){
+        if(current !== ""){
+            current = current.slice(0,-1);
+        }else{
+            operation[operation.length-1] = operation[operation.length-1].slice(0,-1);
+            if(operation[operation.length-1] === ""){
+                operation.pop();
+            }
+        }
+        let jointOp = operation.join("");
+        currentOp.textContent = jointOp + current;
+    }
+})
+
+let refreshBtn = document.querySelector("#refresh");
+refreshBtn.addEventListener("click", function(e){
+    location.reload();
+})
